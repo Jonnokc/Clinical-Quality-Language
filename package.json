@@ -1,0 +1,38 @@
+{
+    "name": "clinical-quality-language",
+    "displayName": "Clinical Quality Language",
+    "description": "Syntax highlighting for the Clinical Quality Language",
+    "version": "1.0.3",
+    "publisher": "jonnokc",
+    "author": "Jonathan Adams",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Jonnokc/Clinical-Quality-Language/issues",
+        "email": "jonnoadams@outlook.com"
+    },
+    "icon": "assets/logo.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Jonnokc/Clinical-Quality-Language"
+    },
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "cql",
+            "aliases": ["cql"],
+            "extensions": [".cql"],
+            "configuration": "./cql.configuration.json"
+        }],
+        "grammars": [{
+            "language": "cql",
+            "scopeName": "source.cql",
+            "path": "./syntaxes/cql.language.json"
+        }]
+    },
+    "dependencies": {}
+}
