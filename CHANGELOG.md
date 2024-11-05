@@ -1,7 +1,8 @@
 # Change Log
 All notable changes to the "cql" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 2.0.1
+* Added more discret support and definition references for definitions referenced within other definitions
 
 ## [Unreleased]
 - Initial release
