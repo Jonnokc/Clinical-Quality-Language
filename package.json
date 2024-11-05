@@ -1,14 +1,13 @@
 {
     "name": "clinical-quality-language",
-    "displayName": "Clinical Quality Language",
-    "description": "Syntax highlighting for the Clinical Quality Language",
-    "version": "1.0.3",
+    "displayName": "Clinical Quality Language (CQL)",
+    "description": "Syntax highlighting for the Clinical Quality Language (CQL)",
+    "version": "2.0.1",
     "publisher": "jonnokc",
     "author": "Jonathan Adams",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/Jonnokc/Clinical-Quality-Language/issues",
-        "email": "jonnoadams@outlook.com"
+        "url": "https://github.com/Jonnokc/Clinical-Quality-Language/issues"
     },
     "icon": "assets/logo.png",
     "repository": {
