@@ -1,8 +1,8 @@
 {
     "name": "clinical-quality-language",
-    "displayName": "Clinical Quality Language (CQL)",
+    "displayName": "Clinical Quality Language - (CQL)",
     "description": "Syntax highlighting for the Clinical Quality Language (CQL)",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "publisher": "jonnokc",
     "author": "Jonathan Adams",
     "license": "MIT",
