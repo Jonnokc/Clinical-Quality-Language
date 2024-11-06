@@ -1,10 +1,21 @@
 {
-    "fileTypes": ["cql"],
+    "fileTypes": [
+        "cql"
+    ],
     "name": "Clinical Quality Language",
     "scopeName": "source.cql",
     "patterns": [
         {
             "include": "#comments"
+        },
+        {
+            "include": "#libraryDefinitions"
+        },
+        {
+            "include": "#parameterDeclarations"
+        },
+        {
+            "include": "#parameterReferences"
         },
         {
             "include": "#declarations"
@@ -32,6 +43,12 @@
         },
         {
             "include": "#support"
+        },
+        {
+            "include": "#FHIRPath"
+        },
+        {
+            "include": "#variable"
         }
     ],
     "repository": {
@@ -56,6 +73,44 @@
                 {
                     "match": "//.*$",
                     "name": "comment.line.double-slash.cql"
+                }
+            ]
+        },
+        "libraryDefinitions": {
+            "patterns": [
+                {
+                    "match": "\\b(library)\\s+([A-Za-z][A-Za-z0-9_]*)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.cql"
+                        },
+                        "2": {
+                            "name": "entity.name.class.cql"
+                        }
+                    }
+                }
+            ]
+        },
+        "parameterDeclarations": {
+            "patterns": [
+                {
+                    "match": "\\b(parameter)\\s+([A-Za-z][A-Za-z0-9_]*)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.cql"
+                        },
+                        "2": {
+                            "name": "variable.parameter.cql"
+                        }
+                    }
+                }
+            ]
+        },
+        "parameterReferences": {
+            "patterns": [
+                {
+                    "match": "\\b(MeasurementPeriod|Context)\\b(?!\\s*:)",
+                    "name": "variable.parameter.cql"
                 }
             ]
         },
@@ -121,6 +176,10 @@
                             "name": "constant.character.escape.cql"
                         }
                     ]
+                },
+                {
+                    "match": "'[^']*'",
+                    "name": "string.quoted.single.ucum.cql"
                 }
             ]
         },
@@ -137,6 +196,14 @@
                 {
                     "match": "@T\\d{2}(:\\d{2}(:\\d{2}(\\.\\d+)?)?)?(Z|[+-]\\d{2}:\\d{2})?\\b",
                     "name": "constant.numeric.time.cql"
+                },
+                {
+                    "match": "\\b\\d+\\.\\d+\\.\\d+\\b",
+                    "name": "constant.numeric.version.cql"
+                },
+                {
+                    "match": "\\b\\d+\\s*'[^']*'\\b",
+                    "name": "constant.numeric.quantity.cql"
                 }
             ]
         },
@@ -163,48 +230,12 @@
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b(where|return|from|select|sort|by|if|end|case|when|then|else|exists|not exists)\\b",
-                    "name": "keyword.control.flow"
+                    "match": "\\b(after|and|as|before|between|contains|distinct|during|ends|except|implies|in|included in|intersect|is|lookup|member of|meets|not|not in|or|overlaps|properly|same|starts|subsumed by|subsumes|to|union|xor|during|includes|included in|meets|meets after|meets before|occurs|occurs between|overlaps|overlaps after|overlaps before|properly included in|properly includes|starting|ending)\\b",
+                    "name": "keyword.other.cql"
                 },
                 {
-                    "match": "\\b(and|or|xor|implies|not|not in)\\b",
-                    "name": "keyword.operator.logical.cql"
-                },
-                {
-                    "match": "\\b(distinct)\\b",
-                    "name": "keyword.other.DML.cql"
-                },
-                {
-                    "match": "\\b(count)\\b",
-                    "name": "support.function.aggregate.cql"
-                },
-                {
-                    "match": "\\b(in|contains|union|intersect|except)\\b",
+                    "match": "\\b(end|point|predecessor|start|successor|width)\\b\\s+\\b(of)\\b",
                     "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(between|properly|starts|ends|during|included in|meets|overlaps|within|contains|same)\\b",
-                    "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(start|end|width|successor|predecessor|point)\\b\\s+\\b(of)\\b",
-                    "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(before|after|starts|ends)\\b",
-                    "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(as|is|cast|convert|to)\\b",
-                    "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(now)\\b",
-                    "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "<=|>=|<|>|=|!=|~|!~",
-                    "name": "keyword.operator.comparison.cql"
                 },
                 {
                     "match": "\\+|-|\\*|\\/|\\bdiv\\b|\\bmod\\b|\\^",
@@ -213,26 +244,50 @@
                 {
                     "match": "&",
                     "name": "keyword.operator.cql"
+                },
+                {
+                    "match": "\\b(all|distinct|from|properly|return|singleton from|sort asc|sort desc)\\b",
+                    "name": "keyword.operator.vocabulary.cql"
+                },
+                {
+                    "match": "\\b(display clause|display name|display text|display value|from code|from codes|from concept|from concepts|where code|where display|where system|where version)\\b",
+                    "name": "keyword.operator.terminology.cql"
+                },
+                {
+                    "match": "\\b(as|cast|cast as|cast from|convert|convert from|convert to|to)\\b",
+                    "name": "keyword.operator.conversion.cql"
+                },
+                {
+                    "match": "\\b(equal to|greater than or equal to|is equivalent to|less than or equal to|not equal to|not equivalent to|not same as|properly included in|properly includes|same as)\\b",
+                    "name": "keyword.operator.comparison.cql"
+                },
+                {
+                    "match": "\\b(Denominator|DenominatorExceptions|DenominatorExclusions|InitialPopulation|MeasureObservation|MeasurePopulation|MeasurePopulationExclusions|Numerator|NumeratorExclusions|Population|StratificationOne|StratificationTwo)\\b",
+                    "name": "keyword.other.measure.cql"
+                },
+                {
+                    "match": "\\b(after|all|asc|ascending|before|begin|between|by|case|collapse|concurrent with|desc|descending|display|during|else|end|ending|except|exists|expand|following|foreach|from|if|included in|includes|Interval|is not null|is null|let|meets|not exists|order by|overlaps|preceding|properly|properly included in|properly includes|return|same|satisfies|select|singleton|sort|starting|starts|such that|then|union|when|where|with|without|within)\\b",
+                    "name": "keyword.other.cql"
                 }
             ]
         },
         "functions": {
             "patterns": [
                 {
-                    "match": "\\b(ABS|ALLFALSE|ALLTRUE|ANYFALSE|ANYTRUE|AVG|COUNT|MAX|MEDIAN|MIN|MODE|POPULATION_STDDEV|POPULATION_VARIANCE|STDDEV|SUM|VARIANCE)\\b",
+                    "match": "\\b(ABS|ALLFALSE|ALLTRUE|ANYFALSE|ANYTRUE|AVG|COUNT|MAX|MEDIAN|MIN|MODE|POPULATION_STDDEV|POPULATION_VARIANCE|STDDEV|SUM|VARIANCE|First|Last|Length|Width|Size|Start|End|Contains|Included|Includes|ProperlyIncluded|ProperlyIncludes|Before|After|Meet|Overlaps|Union|Intersect|Except|Times|Time|Floor|Ceiling|Truncate|Round|ToDecimal|ToInteger|ToString|ToBoolean|ToDate|ToDateTime|ToTime|Upper|Lower|Substring|Position|IndexOf|LastIndexOf|Split|Combine|Concatenate|ReplaceMatches|Matches|Duration|DifferenceBetween|DateFrom|TimezoneFrom|TimezoneOffsetFrom|DurationBetween|WeeksBetween|DaysBetween|HoursBetween|MinutesBetween|SecondsBetween|MillisecondsBetween|Log|Ln|Exp|Coalesce|IsNull|IsFalse|IsTrue|Equal|Equivalent|NotEqual|Less|Greater|LessOrEqual|GreaterOrEqual|Negate|Predecessor|Successor|Power|PowerFunction|CalculateAgeAt|CalculateAge|Convert|Interval|within|days|weeks|months|years|day|month|week|year|hours|minutes|hour|minute|asc|desc|ascending|descending|with|without|such that|let|during|same|starts|ends|meets|overlaps|before|after|includes|included in|begin|collapse|expand|union|except|singleton|first|last|maximum|minimum|median|mode|avg|sum|count|preceding|following|concurrent with|starting|ending|is null|is not null|foreach|satisfies|order by|display|properly includes|properly included in)\\b",
                     "name": "support.function.cql"
                 },
                 {
-                    "match": "\\b(COMBINE|COLLAPSE|EXPAND|INTERSECT|UNION)\\b",
-                    "name": "support.function.cql"
+                    "match": "\\b(AgeInYears|AgeInMonths|AgeInWeeks|AgeInDays|AgeInHours|AgeInMinutes|AgeInSeconds|CalculateAge|CalculateAgeAt|BP|SBP|DBP|GetEncounter|GetProcedure|GetMedication|GetCondition|GetObservation|GetDiagnosticReport|GetImmunization|GetAllergies|MostRecent|MostRecentImagingStudy|MostRecentProcedure|MostRecentCondition|MostRecentMedication|MostRecentObservation|First|Last|Earliest|Latest|Onset|Abatement|Active|Resolved|Inactive|StartDate|EndDate|AuthoredOn|RelevantPeriod|PrevalencePeriod|ParticipationPeriod|LookBack|Normalize|Laterality|Anatomical_Location|NormalizeInterval|NormalizeCode|GetId|GetCode|GetResult|GetValue|GetUnit|GetStartDateTime|GetEndDateTime|HasCategory|HasCode|HasStatus|HasValue|IsActive|IsConfirmed|IsDraft|IsFinished|IsPending|IsResolved|IsRevised|IsSuperseded|IsSuspected|IsUnconfirmed|GetLocation|GetParticipant|GetPerformer|GetRecorder|GetReason|GetSource|GetTarget|GetConcept|GetDescription|GetDosage|GetFrequency|GetInstructions|GetIntensity|GetMethod|GetNegation|GetPriority|GetQuantity|GetRecordedDate|GetRoute|GetSeverity|GetSite|GetStatus|GetStatusReason|GetType|GetVerificationStatus|CalendarAgeInYearsAt|CalendarAgeInMonthsAt|HasCondition|HasEncounter|HasProcedure|HasMedication|HasObservation|MeetsInclusionCriteria|MeetsExclusionCriteria|Incidence|Prevalence|CumulativeIncidence|CumulativePrevalence|PointPrevalence|PeriodPrevalence|GetMostRecent|GetMostRecentCode|GetMostRecentCondition|GetMostRecentDateTime|GetMostRecentDescription|GetMostRecentDiagnosis|GetMostRecentEncounter|GetMostRecentImagingStudy|GetMostRecentLocation|GetMostRecentMedication|GetMostRecentObservation|GetMostRecentParticipant|GetMostRecentPerformer|GetMostRecentProcedure|GetMostRecentReason|GetMostRecentResult|GetMostRecentStatus|GetMostRecentValue|IsOrderable|IsPrescribable|IsDispensable|IsAdministrable|GetDoseForm|GetIngredient|GetStrength|HighestObservedValue|LowestObservedValue|AverageObservedValue|FirstObservedValue|LastObservedValue|InpatientEncounter|OutpatientEncounter|EmergencyEncounter|AmbulatorySurgeryEncounter|HomeHealthEncounter|TelehealthEncounter|IsInpatient|IsOutpatient|IsEmergency|IsAmbulatorySurgery|IsHomeHealth|IsTelehealth|GetAllProcedures|GetAllConditions|GetAllMedications|GetAllObservations|GetAllDiagnosticReports|IsActiveMedication|IsActiveProblem|IsActiveAllergy|IsChronic|IsAcute|IsRecurring|GetEffectiveTime|GetOrderTime|GetPerformedTime|GetRecordedTime|now|Today|TimeOfDay|today|DateTime|Date|Now)\\b",
+                    "name": "support.function.clinical.cql"
                 },
                 {
-                    "match": "\\b([A-Za-z][A-Za-z0-9_]*)\\s*\\(",
-                    "captures": {
-                        "1": {
-                            "name": "entity.name.function.cql"
-                        }
-                    }
+                    "match": "\\b(count)\\b",
+                    "name": "support.function.aggregate.cql"
+                },
+                {
+                    "match": "\\b(mg/dL|mL/min|mm[H]g|kg/m2|beats/minute|breaths/minute|units/L|mEq/L|mg/L|µg/L|ng/mL|mmol/L|U/L|mL/min/1\\.73m2)\\b",
+                    "name": "support.type.unit.qualifier.cql"
                 }
             ]
         },
@@ -251,16 +306,44 @@
         "support": {
             "patterns": [
                 {
+                    "match": "\\b(year|month|week|day|hour|minute|second|millisecond|mg|g|kg|mL|L|mmHg|mmol|mol|eq|iu|mcg|mm|cm|m|m2|kg/m2|bpm|celsius|fahrenheit|kelvin|percent)s?\\b",
+                    "name": "support.type.datetime.unit.cql"
+                },
+                {
+                    "match": "\\b(Patient|Population|Encounter|Condition|Procedure|Medication|Observation|AllergyIntolerance|CarePlan|CareTeam|Claim|Coverage|Device|DiagnosticReport|Goal|Immunization|Location|MedicationRequest|MedicationStatement|NutritionOrder|Organization|Practitioner|ProcedureRequest|RelatedPerson|ServiceRequest|Specimen|Substance|Task|VitalSigns|Result|InferredEncounter|Claim|EncounterService|InferredEncounter|DocumentReference|CarePlanActivity|Allergy|Procedures)\\b",
+                    "name": "support.class.cql"
+                },
+                {
+                    "match": "\\b(PatientCharacteristic|Diagnosis|EncounterPerformed|ProcedurePerformed|MedicationActive|MedicationAdministered|MedicationDispensed|MedicationOrder|Assessment|AdverseEvent|AllergyIntolerance|CareGoal|CommunicationPerformed|DeviceApplied|DeviceOrder|DiagnosticStudyOrder|DiagnosticStudyPerformed|EncounterOrder|InterventionOrder|InterventionPerformed|LaboratoryTestOrder|LaboratoryTestPerformed|PhysicalExamOrder|PhysicalExamPerformed|ProcedureOrder|SubstanceAdministered|SubstanceOrder|SymptomActive)\\b",
+                    "name": "support.class.qdm.cql"
+                }
+            ]
+        },
+        "FHIRPath": {
+            "patterns": [
+                {
+                    "match": "\\.(resolve|ofType|as|is|select|all|repeat|children|descendants|not|empty|subsetOf|supersetOf|iif|extension|hasValue|aggregate|first|last|tail|skip|take|union|combine|exclude|distinct|isDistinct)\\b",
+                    "name": "support.function.fhirpath.cql"
+                },
+                {
+                    "match": "\\b(AdverseEvent|AppointmentResponse|AuditEvent|Basic|Binary|BodyStructure|Bundle|CapabilityStatement|ChargeItem|ClaimResponse|ClinicalImpression|Communication|CommunicationRequest|Composition|Consent|Contract|DetectedIssue|DeviceComponent|DeviceMetric|DeviceRequest|DeviceUseStatement|DocumentManifest|EligibilityRequest|EligibilityResponse|EnrollmentRequest|EnrollmentResponse|EpisodeOfCare|ExpansionProfile|ExplanationOfBenefit|FamilyMemberHistory|Flag|GraphDefinition|GuidanceResponse|HealthcareService|ImagingManifest|ImagingStudy|ImmunizationRecommendation|ImplementationGuide|Library|Linkage|List|Measure|MeasureReport|Media|MessageDefinition|MessageHeader|NamingSystem|OperationDefinition|OperationOutcome|Parameters|PaymentNotice|PaymentReconciliation|Person|PlanDefinition|ProcessRequest|ProcessResponse|Provenance|QuestionnaireResponse|RequestGroup|ResearchStudy|ResearchSubject|RiskAssessment|Schedule|SearchParameter|Sequence|StructureDefinition|StructureMap|Subscription|SupplyDelivery|SupplyRequest|TestReport|TestScript|ValueSet|Vision)\\b",
+                    "name": "support.class.fhir.cql"
+                }
+            ]
+        },
+        "variable": {
+            "patterns": [
+                {
                     "match": "\\$(this|index|total)",
                     "name": "variable.language.cql"
                 },
                 {
-                    "match": "\\b(year|month|week|day|hour|minute|second|millisecond)s?\\b",
-                    "name": "support.type.datetime.unit.cql"
+                    "match": "\\.[A-Za-z][A-Za-z0-9_]*",
+                    "name": "variable.other.property.cql"
                 },
                 {
-                    "match": "\\b(Patient|Population|Encounter|Condition|Procedure|Medication|Observation)\\b",
-                    "name": "support.class.cql"
+                    "match": "\\.(effective|period|start|end|value|code|system|display|status|date|onset|abatement|recorded|performed|authoredOn|issued|time|condition|encounter|procedure|medication|observation|patient|practitioner|organization)\\b",
+                    "name": "variable.other.fhir.property.cql"
                 }
             ]
         }
