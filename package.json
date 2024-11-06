@@ -2,7 +2,7 @@
     "name": "clinical-quality-language",
     "displayName": "Clinical Quality Language - (CQL)",
     "description": "Syntax highlighting for the Clinical Quality Language (CQL)",
-    "version": "2.0.2",
+    "version": "2.0.3",
     "publisher": "jonnokc",
     "author": "Jonathan Adams",
     "license": "MIT",
@@ -21,17 +21,25 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "cql",
-            "aliases": ["cql"],
-            "extensions": [".cql"],
-            "configuration": "./cql.configuration.json"
-        }],
-        "grammars": [{
-            "language": "cql",
-            "scopeName": "source.cql",
-            "path": "./syntaxes/cql.language.json"
-        }]
+        "languages": [
+            {
+                "id": "cql",
+                "aliases": [
+                    "cql"
+                ],
+                "extensions": [
+                    ".cql"
+                ],
+                "configuration": "./cql.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "cql",
+                "scopeName": "source.cql",
+                "path": "./syntaxes/cql.language.json"
+            }
+        ]
     },
     "dependencies": {}
 }
