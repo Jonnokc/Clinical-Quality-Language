@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to the "cql" extension will be documented in this file.
 
+## 2.0.4
+- Updated Syntax highlighting for null syntax
+
 ## 2.0.3
 - Added support for parameter declarations syntax highlighting
 

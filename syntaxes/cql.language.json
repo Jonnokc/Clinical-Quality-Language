@@ -210,10 +210,6 @@
         "constants": {
             "patterns": [
                 {
-                    "match": "\\b(true|false|null)\\b",
-                    "name": "constant.language.cql"
-                },
-                {
                     "match": "\\b\\d+[Ll]?\\b",
                     "name": "constant.numeric.integer.cql"
                 },
@@ -230,7 +226,7 @@
         "keywords": {
             "patterns": [
                 {
-                    "match": "\\b(after|and|as|before|between|contains|distinct|during|ends|except|implies|in|included in|intersect|is|lookup|member of|meets|not|not in|or|overlaps|properly|same|starts|subsumed by|subsumes|to|union|xor|during|includes|included in|meets|meets after|meets before|occurs|occurs between|overlaps|overlaps after|overlaps before|properly included in|properly includes|starting|ending)\\b",
+                    "match": "\\b(after|and|as|before|between|contains|distinct|during|ends|except|implies|in|included in|intersect|is|lookup|member of|meets|not|not in|or|overlaps|properly|same|starts|subsumed by|subsumes|to|union|xor|during|includes|included in|meets|meets after|meets before|occurs|occurs between|overlaps|overlaps after|overlaps before|properly included in|properly includes|starting|ending|all|distinct|from|properly|return|singleton from|sort asc|sort desc|true|false|null)\\b",
                     "name": "keyword.other.cql"
                 },
                 {
@@ -244,10 +240,6 @@
                 {
                     "match": "&",
                     "name": "keyword.operator.cql"
-                },
-                {
-                    "match": "\\b(all|distinct|from|properly|return|singleton from|sort asc|sort desc)\\b",
-                    "name": "keyword.operator.vocabulary.cql"
                 },
                 {
                     "match": "\\b(display clause|display name|display text|display value|from code|from codes|from concept|from concepts|where code|where display|where system|where version)\\b",
@@ -266,7 +258,7 @@
                     "name": "keyword.other.measure.cql"
                 },
                 {
-                    "match": "\\b(after|all|asc|ascending|before|begin|between|by|case|collapse|concurrent with|desc|descending|display|during|else|end|ending|except|exists|expand|following|foreach|from|if|included in|includes|Interval|is not null|is null|let|meets|not exists|order by|overlaps|preceding|properly|properly included in|properly includes|return|same|satisfies|select|singleton|sort|starting|starts|such that|then|union|when|where|with|without|within)\\b",
+                    "match": "\\b(after|all|asc|ascending|before|begin|between|by|case|collapse|concurrent with|desc|descending|display|during|else|end|ending|except|exists|expand|following|foreach|from|if|included in|includes|Interval|is not null|is null|let|meets|not exists|order by|overlaps|preceding|properly|properly included in|properly includes|return|same|satisfies|select|singleton|sort|starting|starts|such that|then|union|when|where|with|without|within|is not null|return)\\b",
                     "name": "keyword.other.cql"
                 }
             ]
