@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to the "cql" extension will be documented in this file.
 
+## 2.0.5
+- Added inline comment shortcut support
+
 ## 2.0.4
 - Updated Syntax highlighting for null syntax
 
